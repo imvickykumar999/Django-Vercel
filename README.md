@@ -1,8 +1,4 @@
-# Django-Vercel
-
->	I have added Licence file, any changes in code is welcome.
-
-## Window Git Bash:
+# `Window Git Bash`:
 
 ```bash
 surface@LAPTOP-716KFR11 MINGW64 ~
