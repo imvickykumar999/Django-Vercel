@@ -2,7 +2,11 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
+from django.core.wsgi import get_wsgi_application
 
+# Expose WSGI app for Vercel
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'helloworld.settings')
+app = get_wsgi_application()
 
 def main():
     """Run administrative tasks."""
