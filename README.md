@@ -92,3 +92,83 @@ Installing collected packages: pip
       Successfully uninstalled pip-21.2.3
 Successfully installed pip-24.3.1
 ```
+
+## **Steps:**
+
+#### **1. Update `manage.py` to Expose WSGI/ASGI Application**
+Vercel needs a `handler` variable or an `app` to serve the Django application. Update your `manage.py` file to expose the WSGI app:
+
+Open `manage.py` and add the following lines at the bottom:
+
+```python
+import os
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "your_project_name.settings")
+app = get_wsgi_application()
+```
+
+Replace `your_project_name` with the name of your Django project (the folder containing `settings.py`).
+
+---
+
+#### **2. Verify the `vercel.json` Configuration**
+Ensure your `vercel.json` is set to route all requests to `manage.py`. Here's an example:
+
+```json
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "manage.py",
+      "use": "@vercel/python"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "manage.py"
+    }
+  ]
+}
+```
+
+---
+
+#### **3. Add a `requirements.txt` File**
+Ensure all required dependencies are listed in `requirements.txt`. Example:
+
+```plaintext
+Django==4.2.5
+gunicorn==21.2.0
+```
+
+Push this file to your GitHub repository.
+
+---
+
+#### **4. Add Static Files Settings**
+In `settings.py`, add the following:
+
+```python
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+```
+
+Then collect static files locally:
+```bash
+python manage.py collectstatic
+```
+
+Commit and push the changes to GitHub.
+
+---
+
+#### **5. Redeploy on Vercel**
+1. Push your changes to the `main` branch of your GitHub repository.
+2. Vercel will automatically deploy the latest changes.
+
+---
+
+#### **6. Check Vercel Logs**
+After deployment, check the **Build Logs** and **Runtime Logs** in the Vercel dashboard for any errors. If errors persist, share the specific log messages for further debugging.
