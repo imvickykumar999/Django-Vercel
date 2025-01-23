@@ -1,3 +1,6 @@
+> # `Git Connected`
+>![image](https://github.com/user-attachments/assets/deb57f7c-765e-4150-a632-51385b1e7a83)
+
 # `Window Git Bash`:
 
 ```bash
