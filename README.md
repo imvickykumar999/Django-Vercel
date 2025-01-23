@@ -95,8 +95,4 @@ Installing collected packages: pip
     Uninstalling pip-21.2.3:
       Successfully uninstalled pip-21.2.3
 Successfully installed pip-24.3.1
-
-
-
-
 ```
